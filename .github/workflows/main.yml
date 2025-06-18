@@ -1,0 +1,51 @@
+name: PHP Project 
+
+on:
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  contents: write
+  packages: read
+
+jobs:
+  python-application-build:
+    runs-on: ubuntu-latest
+    name: Run build
+    steps:
+      - name: Setup PHP
+        uses: invisirisk/pse-action@latest
+        with:
+          api_url: "https://app.dev.veribom.com"
+          app_token: ${{secrets.IR_API_KEY}}
+          
+      - uses: actions/checkout@v4
+      
+      - name: Use PHP
+        uses: actions/setup-php@v2
+        with:
+            php-version: '8.3'  # or any other version you want
+          
+      - name: Install dependencies
+        run: composer install
+
+        
+        
+      - name: Cleanup PSE
+        if: always()
+        uses: invisirisk/pse-action@latest
+        with:
+          cleanup: "true"
+          
+  gather_analytics:
+     runs-on: ubuntu-latest
+     name: Gather Analytics
+     needs: python-application-build
+     if: always()
+     steps:
+      - name: Gather Status
+        uses: invisirisk/pse-action@test
+        with:
+          api_url: "https://app.dev.invisirisk.com"
+          app_token: ${{ secrets.IR_API_KEY }}
+          send_job_status: "true"

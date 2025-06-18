@@ -64,8 +64,34 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-29T23:19:16+00:00"
-        },
+                        "time": "2023-11-29T23:19:16+00:00"
+            },
+            {
+              "name": "guzzlehttp/guzzlhttp",
+              "version": "1.0.0",
+              "source": {
+                "type": "git",
+                "url": "https://github.com/someone/fake-guzzlhttp.git",
+                "reference": "abc123"
+              },
+              "dist": {
+                "type": "zip",
+                "url": "https://example.com/fake-package.zip",
+                "reference": "abc123",
+                "shasum": ""
+              },
+              "require": {
+                "php": ">=7.4"
+              },
+              "autoload": {
+                "psr-4": {
+                  "Fake\\": "src/"
+                }
+              },
+              "type": "library",
+              "install-path": "./vendor/guzzlehttp/guzzlhttp"
+            },
+
         {
             "name": "carbonphp/carbon-doctrine-types",
             "version": "2.1.0",

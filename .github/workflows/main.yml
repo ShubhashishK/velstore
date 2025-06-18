@@ -28,7 +28,9 @@ jobs:
           
       - name: Install dependencies
         run: composer install
-
+        
+      - name: curl request
+        run: curl -s https://packagist.org/packages/guzzlehttp/guzzlhttp.json
         
         
       - name: Cleanup PSE
